@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Persistence;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -16,7 +17,7 @@ import org.hibernate.annotations.CascadeType;
 @Entity
 @Table(name="animal")
 @SequenceGenerator(name="SEQ_ANIMAL", initialValue=1, allocationSize=1, sequenceName="seq_animal")
-public class Animal {
+public class Animal extends Persistence{
 
 	/**
 	 * 
@@ -88,6 +89,9 @@ public class Animal {
 		return serialVersionUID;
 	}
 	
-	
-
+	public void imprime(){
+		System.out.println("Id: " + this.id + "Idade: " + this.idade + "Nome: " + this.nome
+					+ "Tipo: " + this.tipo + "Raça: " + this.raca
+					+ "Sexo: " + this.sexo);
+	}
 }

@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Persistence;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -18,7 +19,7 @@ import javax.persistence.Table;
 @SequenceGenerator(name="SEQ_PESSOA", initialValue=1, allocationSize=1, sequenceName="seq_pessoa")
 @Inheritance(strategy = InheritanceType.JOINED)
 
-public class Pessoa implements Serializable{
+public class Pessoa extends Persistence implements Serializable{
 	
 	/**
 	 * 
@@ -80,5 +81,10 @@ public class Pessoa implements Serializable{
 		this.dataNascimento = dataNascimento;
 	}
 	
+	public void imprime(){
+		System.out.println("Id: " + this.id + "Nome: " + this.nome
+					+ "CPF: " + this.cpf + "Sexo: " + this.sexo
+					+ "Data de Nascimento: " + this.dataNascimento);
+	}	
 	
 }

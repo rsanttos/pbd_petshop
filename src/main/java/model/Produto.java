@@ -1,23 +1,18 @@
 package model;
 
-import java.util.Collection;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.Persistence;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="produto")
 @SequenceGenerator(name="SEQ_PRODUTO", initialValue=1, allocationSize=1, sequenceName="seq_produto")
-public class Produto {
+public class Produto extends Persistence {
 
 	/**
 	 * 
@@ -77,5 +72,9 @@ public class Produto {
 		return serialVersionUID;
 	}
 	
+	public void imprime(){
+		System.out.println("Id: " + this.id + "Preço: " + this.preco
+					+ "Quantidade: " + this.quantidade + "Descrição: " + this.descricao);
+	}
 	
 }

@@ -64,5 +64,8 @@ public class DonoAnimal extends Pessoa {
 		this.dataCadastro = dataCadastro;
 	}
 	
+	public void imprime(){
+		System.out.println("Data de cadastro: " + this.dataCadastro);
+	}
 	
 }

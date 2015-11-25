@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Persistence;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -23,7 +24,7 @@ import org.hibernate.annotations.CascadeType;
 @Entity
 @Table(name="venda")
 @SequenceGenerator(name="SEQ_VENDA", initialValue=1, allocationSize=1, sequenceName="seq_venda")
-public class Venda implements Serializable {
+public class Venda extends Persistence implements Serializable{
 	
 	/**
 	 * 
@@ -115,5 +116,8 @@ public class Venda implements Serializable {
 		this.dataVenda = dataVenda;
 	}
 	
+	public void imprime(){
+		System.out.println("Id: " + this.id + "Data da venda: " + this.dataVenda);
+	}
 	
 }

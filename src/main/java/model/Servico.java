@@ -11,13 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Persistence;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="servico")
 @SequenceGenerator(name="SEQ_SERVICO", initialValue=1, allocationSize=1, sequenceName="seq_servico")
-public class Servico {
+public class Servico extends Persistence {
 
 	/**
 	 * 
@@ -69,6 +70,10 @@ public class Servico {
 		return serialVersionUID;
 	}
 	
+	public void imprime(){
+		System.out.println("Id: " + this.id + "Preço: " + this.preco
+				+ "Quantidade: " + this.descricao);
+	}
 	
 
 }

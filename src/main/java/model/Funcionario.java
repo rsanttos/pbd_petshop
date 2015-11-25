@@ -49,5 +49,8 @@ public class Funcionario extends Pessoa {
 	public void setSalario(int salario) {
 		this.salario = salario;
 	}
-		
+	
+	public void imprime(){
+		System.out.println("Salário: " + this.salario);
+	}
 }
