@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,17 +9,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.persistence.Persistence;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @Entity
 @Table(name="pessoa")
 @SequenceGenerator(name="SEQ_PESSOA", initialValue=1, allocationSize=1, sequenceName="seq_pessoa")
-@Inheritance(strategy = InheritanceType.JOINED)
-
 public class Pessoa extends Persistence implements Serializable{
 	
 	/**
@@ -49,11 +50,35 @@ public class Pessoa extends Persistence implements Serializable{
 	private String sexo;
 	private Date dataNascimento;
 	
-	public Pessoa(){
-		this.nome = null;
-		this.cpf = null;
-		this.sexo = null;
-		this.dataNascimento = null;
+
+	
+	@OneToMany(mappedBy="pessoa")
+    @Cascade({CascadeType.ALL})
+	private Collection<DonoAnimal> donos;
+	
+	@OneToMany(mappedBy="pessoa")
+    @Cascade({CascadeType.ALL})
+	private Collection<Funcionario> funcionarios;
+	
+	
+	public Pessoa() {
+		super();
+	}
+
+	public Collection<DonoAnimal> getDonos() {
+		return donos;
+	}
+
+	public void setDonos(Collection<DonoAnimal> donos) {
+		this.donos = donos;
+	}
+
+	public Collection<Funcionario> getFuncionarios() {
+		return funcionarios;
+	}
+
+	public void setFuncionarios(Collection<Funcionario> funcionarios) {
+		this.funcionarios = funcionarios;
 	}
 	
 	public String getNome() {

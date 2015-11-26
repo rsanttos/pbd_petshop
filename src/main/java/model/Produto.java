@@ -1,10 +1,16 @@
 package model;
 
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Persistence;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -28,11 +34,11 @@ public class Produto extends Persistence {
 	private int quantidade;
 	private String descricao;
 	
-//	@ManyToMany(fetch=FetchType.LAZY)
-//	@JoinTable(name="venda_produto",
-//			joinColumns = @JoinColumn(name="id_produto"),
-//			inverseJoinColumns = @JoinColumn(name="id_venda"))
-//	private Collection<Venda> vendas;	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="venda_produto",
+			joinColumns = @JoinColumn(name="id_produto"),
+			inverseJoinColumns = @JoinColumn(name="id_venda"))
+	private Collection<Venda> vendas;	
 	
 	
 	public Long getId() {
@@ -41,12 +47,12 @@ public class Produto extends Persistence {
 	public void setId(Long id) {
 		this.id = id;
 	}
-//	public Collection<Venda> getVendas() {
-//		return vendas;
-//	}
-//	public void setVendas(Collection<Venda> vendas) {
-//		this.vendas = vendas;
-//	}
+	public Collection<Venda> getVendas() {
+		return vendas;
+	}
+	public void setVendas(Collection<Venda> vendas) {
+		this.vendas = vendas;
+	}
 	public Produto() {
 		super();
 	}

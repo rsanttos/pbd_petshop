@@ -39,12 +39,12 @@ public class Venda extends Persistence implements Serializable{
 	private Date dataVenda;
 	
 	@ManyToOne
-    @Cascade({CascadeType.MERGE, CascadeType.REMOVE})
+    @Cascade({CascadeType.ALL})
 	@JoinColumn(name="id_donoanimal")
 	private DonoAnimal donoanimal;
 	
 	@ManyToOne
-    @Cascade({CascadeType.MERGE, CascadeType.REMOVE})
+    @Cascade({CascadeType.ALL})
 	@JoinColumn(name="id_funcionario")
 	private Funcionario funcionario;
 	
