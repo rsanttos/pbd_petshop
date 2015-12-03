@@ -1,24 +1,52 @@
 package dao;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public interface GenericDAO <T> {
+public class GenericDAO {
 	
-	public void inserir (T objeto);
+	public void inserir (Object entidade){
+		EntityManager em = getEntityManager();
+		em.getTransaction().begin();
+		em.persist(entidade);
+		em.getTransaction().commit();
+	}
 	
-	public void deletar (T objeto);
+	public void atualizar(Object obj) {
+		EntityManager em = getEntityManager();
+		em.getTransaction().begin();
+		em.merge(obj);
+		em.getTransaction().commit();
+	}
 	
-	public void atualizar (T objeto);
+	public Object buscaPorID(Class classe, long i) {
+		EntityManager em = getEntityManager();
+		return em.find(classe, i);
+	}
 	
-	public Object buscaPorID (Class<T> objeto, long id);
+	public void deletar(Object obj) {
+		EntityManager em = getEntityManager();
+		em.getTransaction().begin();
+		em.remove(obj);
+		em.getTransaction().commit();
+	}
 	
-	public void listar();
+	private EntityManager getEntityManager(){
+		return Banco.getInstance().getEntityManager();
+	}
 	
-	public void listarPorID(long id);
-	
-	public EntityManager getEntityManager();
-	
-	public void inserirLog(T objeto);
+	public void inserirLog(Object log){
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("ConexaoDB");
+		EntityManager em = emf.createEntityManager();
+		try {
+			em.getTransaction().begin();
+			em.persist(log);		
+			em.getTransaction().commit();
+		}
+		finally {
+			em.close();
+		}
+	}	
 
 }

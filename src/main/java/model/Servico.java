@@ -15,10 +15,12 @@ import javax.persistence.Persistence;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import dao.Persistencia;
+
 @Entity
 @Table(name="servico")
 @SequenceGenerator(name="SEQ_SERVICO", initialValue=1, allocationSize=1, sequenceName="seq_servico")
-public class Servico extends Persistence {
+public class Servico extends Persistence implements Persistencia {
 
 	/**
 	 * 

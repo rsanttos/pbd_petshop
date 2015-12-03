@@ -17,10 +17,12 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import dao.Persistencia;
+
 @Entity
 @Table(name="pessoa")
 @SequenceGenerator(name="SEQ_PESSOA", initialValue=1, allocationSize=1, sequenceName="seq_pessoa")
-public class Pessoa extends Persistence implements Serializable{
+public class Pessoa extends Persistence implements Serializable, Persistencia{
 	
 	/**
 	 * 

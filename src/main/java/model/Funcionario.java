@@ -18,10 +18,12 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import dao.Persistencia;
+
 @Entity
 @Table(name="funcionario")
 @SequenceGenerator(name="SEQ_FUNCIONARIO", initialValue=1, allocationSize=1, sequenceName="seq_funcionario")
-public class Funcionario extends Persistence implements Serializable {
+public class Funcionario extends Persistence implements Serializable, Persistencia {
 	
 	/**
 	 * 

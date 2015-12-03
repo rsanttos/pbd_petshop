@@ -19,10 +19,12 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import dao.Persistencia;
+
 @Entity
 @Table(name="donoanimal")
 @SequenceGenerator(name="SEQ_DONOANIMAL", initialValue=1, allocationSize=1, sequenceName="seq_donoanimal")
-public class DonoAnimal extends Persistence implements Serializable {
+public class DonoAnimal extends Persistence implements Serializable, Persistencia {
 		
 	/**
 	 * 

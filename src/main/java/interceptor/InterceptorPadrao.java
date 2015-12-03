@@ -9,93 +9,75 @@ import java.util.Set;
 import org.hibernate.EmptyInterceptor;
 import org.hibernate.type.Type;
 
-import dao.InterceptorPadraoDAO;
+import dao.GenericDAO;
 import dao.Persistencia;
-import model.Contato;
 import model.LogDatabase;
 
 public class InterceptorPadrao extends EmptyInterceptor{
 
 	private static final long serialVersionUID = 1L;
 	private String tipoOperacao;
+	private Set<Persistencia> objetosSalvos = new HashSet<Persistencia>();
+	private Set<Persistencia> objetosRemovidos = new HashSet<Persistencia>();
+	private Set<Persistencia> objetosAtualizados = new HashSet<Persistencia>();
 	
-	private Set<Persistencia> objSalvos = new HashSet<Persistencia>();
-	private Set<Persistencia> objDeletados = new HashSet<Persistencia>();
-	private Set<Persistencia> objAtualizados = new HashSet<Persistencia>();
-	
-	private Set<Contato> contatosSalvos = new HashSet<Contato>();
-	
-	InterceptorPadraoDAO dao = new InterceptorPadraoDAO();
-	
+	GenericDAO dao = new GenericDAO();
 	
 	public boolean onSave(Object entity, Serializable id, Object[] state,
 		String[] propertyNames, Type[] types){
-		
-		if(entity instanceof Persistencia){
-			objSalvos.add((Persistencia) entity);
-		}
+		if (entity instanceof Persistencia)
+			objetosSalvos.add((Persistencia) entity);
 		tipoOperacao = "Save";
-		
 		return super.onSave(entity, id, state, propertyNames, types);
 	}
 	
-	public boolean onFlushDirty(Object entity, Serializable id, Object[] state,
-		String[] propertyNames, Type[] types){
-		
-		if(entity instanceof Persistencia){
-			objAtualizados.add((Persistencia) entity);
-		}
+	public boolean onFlushDirty(Object entity,Serializable id,
+		Object[] currentState,Object[] previousState,
+		String[] propertyNames,Type[] types){
+		if (entity instanceof Persistencia)
+			objetosAtualizados.add((Persistencia) entity);
 		tipoOperacao = "Update";
-		
-		return super.onSave(entity, id, state, propertyNames, types);
+		return super.onFlushDirty(entity, id, currentState, previousState, propertyNames, types);
 	}
 	
 	public void onDelete(Object entity, Serializable id, Object[] state,
 		String[] propertyNames, Type[] types){
-		
-		if(entity instanceof Persistencia){
-			objDeletados.add((Persistencia) entity);
-		}
+		if (entity instanceof Persistencia)
+			objetosRemovidos.add((Persistencia) entity);
 		tipoOperacao = "Delete";
+		super.onDelete(entity, id, state, propertyNames, types);
 	}
-	
 	
 	@Override
     public void postFlush(@SuppressWarnings("rawtypes") Iterator entities) {        
         super.postFlush(entities);
-        for (Persistencia cont : objSalvos) {
+        for (Persistencia obj : objetosSalvos) {
         	LogDatabase log = new LogDatabase();
-        	log.setEntidade(cont.getClass().getCanonicalName());
+        	log.setEntidade(obj.getClass().getCanonicalName());
     		log.setTipoOperacao(tipoOperacao);
-    		log.setValorAlterado(cont.getId().toString());
+    		log.setValorAlterado(obj.getId().toString());
     		log.setDataAlteracao(new Date());
     		dao.inserirLog(log);
         }
-        for (Persistencia cont : objAtualizados) {
+        for (Persistencia obj : objetosAtualizados) {
         	LogDatabase log = new LogDatabase();
-        	log.setEntidade(cont.getClass().getCanonicalName());
+        	log.setEntidade(obj.getClass().getCanonicalName());
     		log.setTipoOperacao(tipoOperacao);
-    		log.setValorAlterado(cont.getId().toString());
+    		log.setValorAlterado(obj.getId().toString());
     		log.setDataAlteracao(new Date());
     		dao.inserirLog(log);
         }
-        for (Persistencia cont : objDeletados) {
+        for (Persistencia obj : objetosRemovidos) {
         	LogDatabase log = new LogDatabase();
-        	log.setEntidade(cont.getClass().getCanonicalName());
+        	log.setEntidade(obj.getClass().getCanonicalName());
     		log.setTipoOperacao(tipoOperacao);
-    		log.setValorAlterado(cont.getId().toString());
+    		log.setValorAlterado(obj.getId().toString());
     		log.setDataAlteracao(new Date());
     		dao.inserirLog(log);
         }
-        objSalvos = new HashSet<Persistencia>();
-        objAtualizados = new HashSet<Persistencia>();
-        objDeletados = new HashSet<Persistencia>();
-	}
-	public void imprime(){
-		System.out.println("Tipo da operação: " + this.tipoOperacao);
-		for(Contato c: contatosSalvos){
-			System.out.println();
-		}
-	}
+        objetosSalvos = new HashSet<Persistencia>();
+    	objetosRemovidos = new HashSet<Persistencia>();
+    	objetosAtualizados = new HashSet<Persistencia>();
+	}    
 
 }

@@ -8,41 +8,8 @@ import javax.persistence.Persistence;
 
 import model.Pessoa;
 
-public class PessoaDAO implements GenericDAO<Pessoa>{
+public class PessoaDAO extends GenericDAO{
 
-    public void inserir(Pessoa objeto) {
-        // TODO Auto-generated method stub
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        em.persist(objeto);
-        em.getTransaction().commit();
-    }
-
-    public void deletar(Pessoa objeto) {
-        // TODO Auto-generated method stub
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        em.remove(objeto);
-        em.getTransaction().commit();
-    }
-
-    public void atualizar(Pessoa objeto) {
-        // TODO Auto-generated method stub
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        em.merge(objeto);
-        em.getTransaction().commit();
-    }
-
-    public Object buscaPorID(Class<Pessoa> objeto, long id) {
-        // TODO Auto-generated method stub
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        Pessoa o = em.find(objeto, id);
-        em.getTransaction().commit();
-        
-        return o;
-    }
 
     public void listar() {
         // TODO Auto-generated method stub
@@ -59,10 +26,7 @@ public class PessoaDAO implements GenericDAO<Pessoa>{
         // TODO Auto-generated method stub
         return Banco.getInstance().getEntityManager();
     }
-
-    public void inserirLog(Pessoa objeto) {
-    }
-
+    
 	public void listarPorID(long id) {
 		// TODO Auto-generated method stub
         EntityManager em = getEntityManager();

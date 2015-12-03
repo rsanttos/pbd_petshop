@@ -14,10 +14,12 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import dao.Persistencia;
+
 @Entity
 @Table(name="animal")
 @SequenceGenerator(name="SEQ_ANIMAL", initialValue=1, allocationSize=1, sequenceName="seq_animal")
-public class Animal extends Persistence{
+public class Animal extends Persistence implements Persistencia{
 
 	/**
 	 * 

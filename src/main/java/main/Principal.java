@@ -58,6 +58,9 @@ public class Principal {
 		produtodao.inserir(pr1);
 		sdao.inserir(se1);
 		
+		produtodao.atualizar(produtodao.buscaPorID(Produto
+				.class, (long) 10));
+		
 		produtos.add(pr1);
 		servicos.add(se1);
 		

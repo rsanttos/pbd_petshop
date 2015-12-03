@@ -8,41 +8,7 @@ import javax.persistence.Persistence;
 
 import model.Animal;
 
-public class AnimalDAO implements GenericDAO<Animal>{
-
-	public void inserir(Animal objeto) {
-		// TODO Auto-generated method stub
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        em.persist(objeto);
-        em.getTransaction().commit();
-	}
-
-	public void deletar(Animal objeto) {
-		// TODO Auto-generated method stub
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        em.remove(objeto);
-        em.getTransaction().commit();
-	}
-
-	public void atualizar(Animal objeto) {
-		// TODO Auto-generated method stub
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        em.merge(objeto);
-        em.getTransaction().commit();
-	}
-
-	public Object buscaPorID(Class<Animal> objeto, long id) {
-		// TODO Auto-generated method stub
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        Animal o = em.find(objeto, id);
-        em.getTransaction().commit();
-        
-        return o;
-	}
+public class AnimalDAO extends GenericDAO{
 
 	public void listar() {
 		// TODO Auto-generated method stub
@@ -58,9 +24,6 @@ public class AnimalDAO implements GenericDAO<Animal>{
 	public EntityManager getEntityManager() {
 		// TODO Auto-generated method stub
         return Banco.getInstance().getEntityManager();
-	}
-
-	public void inserirLog(Animal objeto) {
 	}
 
 	public void listarPorID(long id) {
