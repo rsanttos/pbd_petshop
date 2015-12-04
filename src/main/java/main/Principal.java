@@ -41,7 +41,7 @@ public class Principal {
 		ProdutoDAO produtodao = new ProdutoDAO();
 		InterceptorPadraoDAO ipdao = new InterceptorPadraoDAO();
 		AnimalDAO adao = new AnimalDAO();
-		
+				
 		Produto pr1 = new Produto();
 		pr1.setDescricao("shampoo");
 		pr1.setPreco(200);
