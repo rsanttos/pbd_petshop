@@ -6,7 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import model.Animal;
 import model.Funcionario;
+import model.Venda;
 
 public class FuncionarioDAO extends GenericDAO{
 
@@ -34,5 +36,15 @@ public class FuncionarioDAO extends GenericDAO{
         for(Funcionario e: lista){
            e.imprime();
         }
+	}
+	
+	public void listarVendas(long id){
+        EntityManager em = getEntityManager();
+        javax.persistence.Query query = em.createQuery("FROM Venda v WHERE v.funcionario.id = :id");
+        query.setParameter("id", id);
+        List<Venda> lista = ((javax.persistence.Query) query).getResultList();
+        for(Venda e: lista){
+        		e.imprime();
+        }	
 	}
 }

@@ -4,9 +4,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import model.AnimalDoDono;
+import model.Animal;
 import model.DonoAnimal;
 import model.Pessoa;
+import model.Venda;
 
 public class DonoAnimalDAO extends GenericDAO{
 
@@ -46,13 +47,23 @@ public class DonoAnimalDAO extends GenericDAO{
         }
 	}
 	
-	public AnimalDoDono listarAnimaisDoDono(){
+	public void listarAnimais(long id){
         EntityManager em = getEntityManager();
-        javax.persistence.Query query = em.createQuery("FROM Animal a, DonoAnimal d WHERE d.id = 1 AND a.id = 13");
-        List<Object> lista = ((javax.persistence.Query) query).getResultList();
-        AnimalDoDono animaldodono = new AnimalDoDono();
-        for(Object e: lista){
+        javax.persistence.Query query = em.createQuery("FROM Animal a WHERE a.donoanimal.id = :id");
+        query.setParameter("id", id);
+        List<Animal> lista = ((javax.persistence.Query) query).getResultList();
+        for(Animal e: lista){
+        		e.imprime();
         }
-        return animaldodono;
+	}
+	
+	public void listarCompras(long id){
+        EntityManager em = getEntityManager();
+        javax.persistence.Query query = em.createQuery("FROM Venda v WHERE v.donoanimal.id = :id");
+        query.setParameter("id", id);
+        List<Venda> lista = ((javax.persistence.Query) query).getResultList();
+        for(Venda e: lista){
+        		e.imprime();
+        }		
 	}
 }

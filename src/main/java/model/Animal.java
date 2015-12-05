@@ -92,8 +92,8 @@ public class Animal extends Persistence implements Persistencia{
 	}
 	
 	public void imprime(){
-		System.out.println("Id: " + this.id + "Idade: " + this.idade + "Nome: " + this.nome
-					+ "Tipo: " + this.tipo + "Raça: " + this.raca
-					+ "Sexo: " + this.sexo);
+		System.out.println("Id: " + this.id + " Idade: " + this.idade + " Nome: " + this.nome
+					+ " Tipo: " + this.tipo + " Raça: " + this.raca
+					+ " Sexo: " + this.sexo + "\n");
 	}
 }

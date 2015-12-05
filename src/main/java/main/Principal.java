@@ -64,16 +64,32 @@ public class Principal {
 		produtos.add(pr1);
 		servicos.add(se1);
 		
+		donodao.listarAnimais(13);
+		
+		donodao.listarCompras(20);	
+		
+		fdao.listarVendas(32);
+		
+		
+		
+		
 		Pessoa p = new Pessoa();
 		p.setNome("Ramon");
 		p.setSexo("H");
-		p.setCpf("11111111");
+		p.setCpf("11111111"); 
 		Funcionario f = new Funcionario();
 		f.setSalario(2000);
 		f.setPessoa(p);
 		p.setFuncionarios(Collections.singleton(f));
-//		p.getFuncionarios().add(f);
 		
+		fdao.inserir(f);
+		
+		f.setSalario(4000);
+		
+		fdao.atualizar(f);
+		
+//		p.getFuncionarios().add(f);
+		/*		
 		Pessoa p2 = new Pessoa();
 		p2.setNome("Jose");
 		p2.setSexo("H");
@@ -112,7 +128,7 @@ public class Principal {
 		v.setProdutos(produtos);
 		v.setServicos(servicos);
 		
-		vdao.inserir(v);
+		vdao.inserir(v);*/
 	}
 
 }
