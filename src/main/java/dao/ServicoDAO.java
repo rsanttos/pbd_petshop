@@ -10,15 +10,15 @@ import model.Servico;
 
 public class ServicoDAO extends GenericDAO{
 
-    public void listar() {
+    public List<Servico> listar() {
         // TODO Auto-generated method stub
         EntityManager em = getEntityManager();
-        javax.persistence.Query query = em.createQuery("FROM Produto e");
+        javax.persistence.Query query = em.createQuery("FROM Servico e");
         List<Servico> lista = ((javax.persistence.Query) query).getResultList();
         for(Servico e: lista){
            e.imprime();
         }
-        
+        return lista;        
     }
 
     public EntityManager getEntityManager() {

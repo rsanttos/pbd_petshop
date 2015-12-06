@@ -16,15 +16,15 @@ public class ProdutoDAO extends GenericDAO{
         // TODO Auto-generated method stub
         return Banco.getInstance().getEntityManager();
     }
-	public void listar() {
+	public List<Produto> listar() {
 		// TODO Auto-generated method stub
         EntityManager em = getEntityManager();
         javax.persistence.Query query = em.createQuery("FROM Produto e");
-        List<Animal> lista = ((javax.persistence.Query) query).getResultList();
-        for(Animal e: lista){
+        List<Produto> lista = ((javax.persistence.Query) query).getResultList();
+        for(Produto e: lista){
            e.imprime();
         }
-		
+        return lista;		
 	}
 
 	public void listarPorID(long id) {

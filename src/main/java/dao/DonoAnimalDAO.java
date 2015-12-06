@@ -11,7 +11,7 @@ import model.Venda;
 
 public class DonoAnimalDAO extends GenericDAO{
 
-    public void listar() {
+    public List<DonoAnimal> listar() {
         // TODO Auto-generated method stub
         EntityManager em = getEntityManager();
         javax.persistence.Query query = em.createQuery("FROM DonoAnimal e");
@@ -19,7 +19,7 @@ public class DonoAnimalDAO extends GenericDAO{
         for(DonoAnimal e: lista){
            e.imprime();
         }
-        
+        return lista;
     }
 
     public EntityManager getEntityManager() {

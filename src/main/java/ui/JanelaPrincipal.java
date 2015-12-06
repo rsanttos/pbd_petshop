@@ -25,9 +25,10 @@ public class JanelaPrincipal extends JFrame {
 
 	public void initUI() {
 
-		String[] buttons = { "", "Sair do sistema", "Cadastrar Funcionario", "Cadastrar Dono de Animal",
+		String[] buttons = { "", "Sair do sistema", "Cadastrar Funcionario", "Cadastrar Dono de Animal", 
 				"Realizar venda", "Listar produtos", "Listar Servicos", "Donos cadastrados",
-				"Funcionarios cadastrados" };
+				"Funcionarios cadastrados", "Cadastrar Produto",
+				"Cadastrar Serviço" };
 
 		for (int i = 0; i < buttons.length; i++) {
 
@@ -97,6 +98,23 @@ public class JanelaPrincipal extends JFrame {
 					}
 				});
 				panel.add(botaolistafuncionarios);
+			}else if(i == 9){
+				JButton botaocadastraproduto = new JButton(buttons[i]);
+				botaocadastraproduto.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent event) {
+						new CadastroProduto();
+					}
+				});
+				panel.add(botaocadastraproduto);				
+			}else if(i == 10){
+				JButton botaocadastraservico = new JButton(buttons[i]);
+				botaocadastraservico.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent event) {
+						new CadastroServico();
+					}
+				});
+				panel.add(botaocadastraservico);	
+				
 			}else{
 				panel.add(new JButton(buttons[i]));
 			}
@@ -105,7 +123,7 @@ public class JanelaPrincipal extends JFrame {
 		add(panel);
 
 		setTitle("PetShop");
-		setSize(500, 350);
+		setSize(700, 500);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 	}

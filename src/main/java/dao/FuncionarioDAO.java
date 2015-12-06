@@ -12,7 +12,7 @@ import model.Venda;
 
 public class FuncionarioDAO extends GenericDAO{
 
-    public void listar() {
+    public List<Funcionario> listar() {
         // TODO Auto-generated method stub
         EntityManager em = getEntityManager();
         javax.persistence.Query query = em.createQuery("FROM Funcionario e");
@@ -20,7 +20,7 @@ public class FuncionarioDAO extends GenericDAO{
         for(Funcionario e: lista){
            e.imprime();
         }
-        
+        return lista;
     }
 
     public EntityManager getEntityManager() {
