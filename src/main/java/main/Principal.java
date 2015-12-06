@@ -6,8 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
+
+import javax.swing.SwingUtilities;
 
 import dao.AnimalDAO;
 import dao.DonoAnimalDAO;
@@ -17,13 +18,11 @@ import dao.PessoaDAO;
 import dao.ProdutoDAO;
 import dao.ServicoDAO;
 import dao.VendaDAO;
-import model.Animal;
-import model.DonoAnimal;
 import model.Funcionario;
 import model.Pessoa;
 import model.Produto;
 import model.Servico;
-import model.Venda;
+import ui.JanelaPrincipal;
 
 public class Principal {
 
@@ -33,7 +32,7 @@ public class Principal {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		
 
-		PessoaDAO pdao = new PessoaDAO();
+/*		PessoaDAO pdao = new PessoaDAO();
 		FuncionarioDAO fdao = new FuncionarioDAO();
 		DonoAnimalDAO donodao = new DonoAnimalDAO();
 		VendaDAO vdao = new VendaDAO();
@@ -68,10 +67,7 @@ public class Principal {
 		
 		donodao.listarCompras(20);	
 		
-		fdao.listarVendas(32);
-		
-		
-		
+		fdao.listarVendas(32);	
 		
 		Pessoa p = new Pessoa();
 		p.setNome("Ramon");
@@ -89,7 +85,7 @@ public class Principal {
 		fdao.atualizar(f);
 		
 //		p.getFuncionarios().add(f);
-		/*		
+				
 		Pessoa p2 = new Pessoa();
 		p2.setNome("Jose");
 		p2.setSexo("H");
@@ -129,6 +125,14 @@ public class Principal {
 		v.setServicos(servicos);
 		
 		vdao.inserir(v);*/
+		
+		SwingUtilities.invokeLater(new Runnable() {
+
+            public void run() {
+            	JanelaPrincipal ex = new JanelaPrincipal();
+                ex.setVisible(true);
+            }
+        });
 	}
 
 }
