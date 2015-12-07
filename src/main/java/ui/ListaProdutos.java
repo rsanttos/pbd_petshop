@@ -1,17 +1,25 @@
 package ui;
 
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingUtilities;
 
 import dao.ProdutoDAO;
 
@@ -24,6 +32,8 @@ public class ListaProdutos extends JFrame {
 	private JScrollPane scrollpane;
 	private JTable table;
 	private GroupLayout grouplayout;
+    private int linhaSelecionada;
+
 
 	private static TMListaProdutos modelo;
 
@@ -33,6 +43,7 @@ public class ListaProdutos extends JFrame {
 		this.table = new JTable();
 		this.scrollpane = new JScrollPane();
 		this.grouplayout = new GroupLayout(painel);
+		this.linhaSelecionada = -1;
 		
 		
 		this.botaosair = new JButton("Voltar para janela principal");
@@ -72,6 +83,39 @@ public class ListaProdutos extends JFrame {
 		modelo = new TMListaProdutos(pdao.listar());
 		this.table.setModel(modelo);
 
+		this.table.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		linhaSelecionada = table.getSelectedRow();
+        		
+        		Point p = e.getPoint();
+        		if (e.getClickCount() == 2) {
+        			System.out.println(linhaSelecionada);
+        			
+        			Container container = SwingUtilities.getAncestorOfClass(JDesktopPane.class, (Component)e.getSource());
+
+                    if (container != null)
+                    {
+                        JRootPane desktopPane = getRootPane();
+                        DetalheProduto jdp = new DetalheProduto(modelo.getProduto(linhaSelecionada));
+                        desktopPane.add(jdp);//add f1 to desktop pane
+                        jdp.setResizable(true);
+            			jdp.pack();
+            			jdp.setVisible(true);
+                        ;
+                       /* Dimension desktopSize = getDesktopPane().getSize();
+                        f1.setSize(desktopSize);
+                        f1.setPreferredSize(desktopSize);
+                        MainClass.dontmoveframe();*/
+                    } 
+        			
+        			
+                    DetalheProduto jdp = new DetalheProduto(modelo.getProduto(linhaSelecionada));
+        			
+        		}
+        	}
+        });
+		
 		this.table.setColumnSelectionAllowed(true);
 		this.scrollpane.setViewportView(this.table);
         if (this.table.getColumnModel().getColumnCount() > 0) {
@@ -125,6 +169,7 @@ public class ListaProdutos extends JFrame {
 		this.table = new JTable();
 		this.scrollpane = new JScrollPane();
 		this.grouplayout = new GroupLayout(painel);
+		this.linhaSelecionada = -1;
 		
 		
 		this.botaosair = new JButton("Voltar para janela principal");
@@ -162,6 +207,40 @@ public class ListaProdutos extends JFrame {
 		ProdutoDAO pdao = new ProdutoDAO();
 		modelo = new TMListaProdutos(pdao.listarPorDescricao(nome));
 		this.table.setModel(modelo);
+		
+
+		this.table.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		linhaSelecionada = table.getSelectedRow();
+        		
+        		Point p = e.getPoint();
+        		if (e.getClickCount() == 2) {
+        			System.out.println(linhaSelecionada);
+        			
+        			Container container = SwingUtilities.getAncestorOfClass(JDesktopPane.class, (Component)e.getSource());
+
+                    if (container != null)
+                    {
+                        JRootPane desktopPane = getRootPane();
+                        DetalheProduto jdp = new DetalheProduto(modelo.getProduto(linhaSelecionada));
+                        desktopPane.add(jdp);//add f1 to desktop pane
+                        jdp.setResizable(true);
+            			jdp.pack();
+            			jdp.setVisible(true);
+                        ;
+                       /* Dimension desktopSize = getDesktopPane().getSize();
+                        f1.setSize(desktopSize);
+                        f1.setPreferredSize(desktopSize);
+                        MainClass.dontmoveframe();*/
+                    } 
+        			
+        			
+                    DetalheProduto jdp = new DetalheProduto(modelo.getProduto(linhaSelecionada));
+        			
+        		}
+        	}
+        });
 
 		this.table.setColumnSelectionAllowed(true);
 		this.scrollpane.setViewportView(this.table);

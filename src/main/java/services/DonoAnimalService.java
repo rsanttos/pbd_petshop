@@ -4,6 +4,7 @@ import java.util.Date;
 
 import dao.DonoAnimalDAO;
 import model.DonoAnimal;
+import model.Produto;
 
 public class DonoAnimalService {
 	private DonoAnimal dono;
@@ -38,6 +39,17 @@ public class DonoAnimalService {
 		if(mensagem == mensagemOk){
 			this.dono.setDataCadastro(new Date());
 			donodao.inserir(this.dono);
+			return mensagem;
+		}else{
+			return mensagem;
+		}
+	}
+	
+	public String atualiza(){
+		DonoAnimal p = this.dono;
+		String mensagem = this.valida();
+		if(mensagem == mensagemOk){
+			donodao.atualizar(p);
 			return mensagem;
 		}else{
 			return mensagem;

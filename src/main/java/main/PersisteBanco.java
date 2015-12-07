@@ -11,7 +11,6 @@ import java.util.List;
 import dao.AnimalDAO;
 import dao.DonoAnimalDAO;
 import dao.FuncionarioDAO;
-import dao.InterceptorPadraoDAO;
 import dao.PessoaDAO;
 import dao.ProdutoDAO;
 import dao.ServicoDAO;
@@ -39,7 +38,6 @@ public class PersisteBanco {
 		VendaDAO vdao = new VendaDAO();
 		ServicoDAO sdao = new ServicoDAO();
 		ProdutoDAO produtodao = new ProdutoDAO();
-		InterceptorPadraoDAO ipdao = new InterceptorPadraoDAO();
 		AnimalDAO adao = new AnimalDAO();
 	
 		Produto pr1 = new Produto();

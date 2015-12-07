@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 
 import dao.FuncionarioDAO;
 import model.Funcionario;
+import model.Produto;
 
 public class FuncionarioService {
 	private Funcionario funcionario;
@@ -45,5 +46,15 @@ public class FuncionarioService {
 		}
 	}
 	
+	public String atualiza(){
+		Funcionario p = this.funcionario;
+		String mensagem = this.valida();
+		if(mensagem == mensagemOk){
+			fdao.atualizar(p);
+			return mensagem;
+		}else{
+			return mensagem;
+		}
+	}
 	
 }

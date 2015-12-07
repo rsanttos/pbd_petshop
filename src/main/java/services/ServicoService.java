@@ -41,7 +41,20 @@ public class ServicoService {
 		}else{
 			return mensagem;
 		}
+	}
+	
+	public String atualiza(){
+		Servico s = this.servico;
+		String mensagem = this.valida();
+		if(mensagem == mensagemOk){
+			sdao.atualizar(s);
+			return mensagem;
+		}else{
+			return mensagem;
+		}
 	}	
+	
+	
 	public List<String> recebeNomesServicos(){
 		List<String> nomesprodutos = sdao.listarNomesServicos();
 		if(nomesprodutos != null){
