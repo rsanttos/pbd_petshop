@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import model.Animal;
+import model.DonoAnimal;
 
 public class AnimalDAO extends GenericDAO{
 
@@ -34,5 +35,17 @@ public class AnimalDAO extends GenericDAO{
         for(Animal e: lista){
            e.imprime();
         }
+	}
+
+	public List<Animal> listarPorNome(String nome) {
+		// TODO Auto-generated method stub
+        EntityManager em = getEntityManager();
+        javax.persistence.Query query = em.createQuery("FROM Animal d WHERE d.nome LIKE :nome");
+        query.setParameter("nome","%" + nome + "%");
+        List<Animal> lista = ((javax.persistence.Query) query).getResultList();
+        for(Animal e: lista){
+           e.imprime();
+        }
+        return lista;
 	}
 }

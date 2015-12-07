@@ -3,13 +3,13 @@ package ui;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -98,7 +98,8 @@ public class CadastroFuncionario extends JFrame {
 				novofuncionario.setSalario(Integer.valueOf(tfsalario.getText()));
 				novofuncionario.setPessoa(novapessoa);
 				FuncionarioService fservice = new FuncionarioService(novofuncionario);
-				fservice.persiste();				
+				JOptionPane.showMessageDialog(null, fservice.persiste());
+								
 			}
 		});
 		painel.add(botaocadastrar);

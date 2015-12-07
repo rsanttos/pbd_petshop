@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -88,7 +89,7 @@ public class CadastroDono extends JFrame {
 				novapessoa.setSexo(tfsexo.getText());
 				novodono.setPessoa(novapessoa);
 				DonoAnimalService donoservice = new DonoAnimalService(novodono);
-				donoservice.persiste();
+				JOptionPane.showMessageDialog(null, donoservice.persiste());
 			}
 		});
 		painel.add(botaocadastrar);

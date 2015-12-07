@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import model.Animal;
+import model.DonoAnimal;
 import model.Funcionario;
 import model.Venda;
 
@@ -46,5 +47,17 @@ public class FuncionarioDAO extends GenericDAO{
         for(Venda e: lista){
         		e.imprime();
         }	
+	}
+
+	public List<Funcionario> listarPorNome(String nome) {
+		// TODO Auto-generated method stub
+        EntityManager em = getEntityManager();
+        javax.persistence.Query query = em.createQuery("FROM Funcionario d WHERE d.pessoa.nome LIKE :nome");
+        query.setParameter("nome","%" + nome + "%");
+        List<Funcionario> lista = ((javax.persistence.Query) query).getResultList();
+        for(Funcionario e: lista){
+           e.imprime();
+        }
+        return lista;
 	}
 }

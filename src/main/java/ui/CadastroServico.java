@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -60,7 +61,7 @@ public class CadastroServico extends JFrame {
 				novoservico.setDescricao(tfdescricao.getText());
 				novoservico.setPreco(Integer.valueOf(tfpreco.getText()));
 				ServicoService servicoservice = new ServicoService(novoservico);
-				servicoservice.persiste();
+				JOptionPane.showMessageDialog(null,servicoservice.persiste());
 			}
 		});
 		painel.add(botaocadastrar);

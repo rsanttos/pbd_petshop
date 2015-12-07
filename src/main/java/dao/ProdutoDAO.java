@@ -1,12 +1,10 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
-import model.Animal;
 import model.Produto;
 
 public class ProdutoDAO extends GenericDAO{
@@ -30,10 +28,32 @@ public class ProdutoDAO extends GenericDAO{
 	public void listarPorID(long id) {
 		// TODO Auto-generated method stub
         EntityManager em = getEntityManager();
-        javax.persistence.Query query = em.createQuery("FROM Produto e WHERE e.id = "+id);
+        javax.persistence.Query query = em.createQuery("FROM Produto e WHERE e.id = :id");
+        query.setParameter("id", id);
         List<Produto> lista = ((javax.persistence.Query) query).getResultList();
         for(Produto e: lista){
            e.imprime();
         }
+	}
+
+	public List<Produto> listarPorDescricao(String nome) {
+		// TODO Auto-generated method stub
+        EntityManager em = getEntityManager();
+        javax.persistence.Query query = em.createQuery("FROM Produto d WHERE d.descricao LIKE :nome");
+        query.setParameter("nome","%" + nome + "%");
+        List<Produto> lista = ((javax.persistence.Query) query).getResultList();
+        for(Produto e: lista){
+           e.imprime();
+        }
+        return lista;
+	}
+	
+	public List<String> listarNomesProdutos(){
+		List<Produto> produtos = this.listar();
+		List<String> nomes = new ArrayList<String>();
+		for(Produto p : produtos){
+			nomes.add(p.getDescricao());
+		}
+		return nomes;
 	}
 }

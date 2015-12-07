@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -69,7 +70,7 @@ public class CadastroProduto extends JFrame {
 				novoproduto.setPreco(Integer.valueOf(tfpreco.getText()));
 				novoproduto.setQuantidade(Integer.valueOf(tfquantidade.getText()));
 				ProdutoService produtoservice = new ProdutoService(novoproduto);
-				produtoservice.persiste();
+				JOptionPane.showMessageDialog(null,produtoservice.persiste());
 			}
 		});
 		painel.add(botaocadastrar);

@@ -74,7 +74,7 @@ public class Servico extends Persistence implements Persistencia {
 	
 	public void imprime(){
 		System.out.println("Id: " + this.id + "Preço: " + this.preco
-				+ "Quantidade: " + this.descricao);
+				+ "Descricao: " + this.descricao);
 	}
 	
 

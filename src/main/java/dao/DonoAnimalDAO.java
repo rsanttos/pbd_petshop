@@ -27,7 +27,7 @@ public class DonoAnimalDAO extends GenericDAO{
         return Banco.getInstance().getEntityManager();
     }
 
-	public void listarPorID(long id) {
+	public List<DonoAnimal> listarPorID(long id) {
 		// TODO Auto-generated method stub
         EntityManager em = getEntityManager();
         javax.persistence.Query query = em.createQuery("FROM DonoAnimal e WHERE e.id = "+id);
@@ -35,7 +35,21 @@ public class DonoAnimalDAO extends GenericDAO{
         for(DonoAnimal e: lista){
            e.imprime();
         }
+        return lista;
 	}
+
+	public List<DonoAnimal> listarPorNome(String nome) {
+		// TODO Auto-generated method stub
+        EntityManager em = getEntityManager();
+        javax.persistence.Query query = em.createQuery("FROM DonoAnimal d WHERE d.pessoa.nome LIKE :nome");
+        query.setParameter("nome","%" + nome + "%");
+        List<DonoAnimal> lista = ((javax.persistence.Query) query).getResultList();
+        for(DonoAnimal e: lista){
+           e.imprime();
+        }
+        return lista;
+	}
+
 
 	public void listarPessoaDonoAnimal(){
         EntityManager em = getEntityManager();
