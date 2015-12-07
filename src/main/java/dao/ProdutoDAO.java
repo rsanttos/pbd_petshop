@@ -25,7 +25,7 @@ public class ProdutoDAO extends GenericDAO{
         return lista;		
 	}
 
-	public void listarPorID(long id) {
+	public List<Produto> listarPorID(long id) {
 		// TODO Auto-generated method stub
         EntityManager em = getEntityManager();
         javax.persistence.Query query = em.createQuery("FROM Produto e WHERE e.id = :id");
@@ -34,6 +34,7 @@ public class ProdutoDAO extends GenericDAO{
         for(Produto e: lista){
            e.imprime();
         }
+        return lista;
 	}
 
 	public List<Produto> listarPorDescricao(String nome) {

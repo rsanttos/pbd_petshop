@@ -26,7 +26,7 @@ public class VendaDAO extends GenericDAO{
         return Banco.getInstance().getEntityManager();
     }
 
-	public void listarPorID(long id) {
+	public List<Venda> listarPorID(long id) {
 		// TODO Auto-generated method stub
         EntityManager em = getEntityManager();
         javax.persistence.Query query = em.createQuery("FROM Venda e WHERE e.id = "+id);
@@ -34,5 +34,6 @@ public class VendaDAO extends GenericDAO{
         for(Venda e: lista){
            e.imprime();
         }
+        return lista;
 	}
 }

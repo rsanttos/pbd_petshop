@@ -29,7 +29,7 @@ public class FuncionarioDAO extends GenericDAO{
         return Banco.getInstance().getEntityManager();
     }
 
-	public void listarPorID(long id) {
+	public List<Funcionario> listarPorID(long id) {
 		// TODO Auto-generated method stub
         EntityManager em = getEntityManager();
         javax.persistence.Query query = em.createQuery("FROM Funcionario e WHERE e.id = "+id);
@@ -37,9 +37,10 @@ public class FuncionarioDAO extends GenericDAO{
         for(Funcionario e: lista){
            e.imprime();
         }
+        return lista;
 	}
 	
-	public void listarVendas(long id){
+	public List<Venda> listarVendas(long id){
         EntityManager em = getEntityManager();
         javax.persistence.Query query = em.createQuery("FROM Venda v WHERE v.funcionario.id = :id");
         query.setParameter("id", id);
@@ -47,6 +48,7 @@ public class FuncionarioDAO extends GenericDAO{
         for(Venda e: lista){
         		e.imprime();
         }	
+        return lista;
 	}
 
 	public List<Funcionario> listarPorNome(String nome) {

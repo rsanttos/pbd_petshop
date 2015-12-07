@@ -27,7 +27,7 @@ public class PessoaDAO extends GenericDAO{
         return Banco.getInstance().getEntityManager();
     }
     
-	public void listarPorID(long id) {
+	public List<Pessoa> listarPorID(long id) {
 		// TODO Auto-generated method stub
         EntityManager em = getEntityManager();
         javax.persistence.Query query = em.createQuery("FROM Pessoa e WHERE e.id = "+id);
@@ -35,5 +35,6 @@ public class PessoaDAO extends GenericDAO{
         for(Pessoa e: lista){
            e.imprime();
         }
+    	return lista;
 	}
 }

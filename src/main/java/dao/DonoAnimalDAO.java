@@ -30,7 +30,8 @@ public class DonoAnimalDAO extends GenericDAO{
 	public List<DonoAnimal> listarPorID(long id) {
 		// TODO Auto-generated method stub
         EntityManager em = getEntityManager();
-        javax.persistence.Query query = em.createQuery("FROM DonoAnimal e WHERE e.id = "+id);
+        javax.persistence.Query query = em.createQuery("FROM DonoAnimal e WHERE e.id = :id");
+        query.setParameter("id", id);
         List<DonoAnimal> lista = ((javax.persistence.Query) query).getResultList();
         for(DonoAnimal e: lista){
            e.imprime();
@@ -51,7 +52,7 @@ public class DonoAnimalDAO extends GenericDAO{
 	}
 
 
-	public void listarPessoaDonoAnimal(){
+	public List<Pessoa> listarPessoaDonoAnimal(){
         EntityManager em = getEntityManager();
         javax.persistence.Query query = em.createQuery("FROM DonoAnimal e, Pessoa p WHERE e.id = p.id");
         List<Pessoa> listaPessoa = ((javax.persistence.Query) query).getResultList();
@@ -59,9 +60,11 @@ public class DonoAnimalDAO extends GenericDAO{
         for(Pessoa e: listaPessoa){
            e.imprime();           
         }
+        
+        return listaPessoa;
 	}
 	
-	public void listarAnimais(long id){
+	public List<Animal> listarAnimais(long id){
         EntityManager em = getEntityManager();
         javax.persistence.Query query = em.createQuery("FROM Animal a WHERE a.donoanimal.id = :id");
         query.setParameter("id", id);
@@ -69,15 +72,17 @@ public class DonoAnimalDAO extends GenericDAO{
         for(Animal e: lista){
         		e.imprime();
         }
+        return lista;
 	}
 	
-	public void listarCompras(long id){
+	public List<Venda> listarCompras(long id){
         EntityManager em = getEntityManager();
         javax.persistence.Query query = em.createQuery("FROM Venda v WHERE v.donoanimal.id = :id");
         query.setParameter("id", id);
         List<Venda> lista = ((javax.persistence.Query) query).getResultList();
         for(Venda e: lista){
         		e.imprime();
-        }		
+        }
+        return lista;
 	}
 }

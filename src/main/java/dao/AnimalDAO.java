@@ -27,14 +27,16 @@ public class AnimalDAO extends GenericDAO{
         return Banco.getInstance().getEntityManager();
 	}
 
-	public void listarPorID(long id) {
+	public List<Animal> listarPorID(long id) {
 		// TODO Auto-generated method stub
         EntityManager em = getEntityManager();
-        javax.persistence.Query query = em.createQuery("FROM Animal e WHERE e.id = "+id);
+        javax.persistence.Query query = em.createQuery("FROM Animal e WHERE e.id = :id");
+        query.setParameter("id", id);
         List<Animal> lista = ((javax.persistence.Query) query).getResultList();
         for(Animal e: lista){
            e.imprime();
         }
+        return lista;
 	}
 
 	public List<Animal> listarPorNome(String nome) {
